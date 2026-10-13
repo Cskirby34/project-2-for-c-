@@ -74,6 +74,22 @@ int load_valid_words(valid_word_list_t *valid_words) {
 int load_todays_answer(char answer[]) {
 
   // YOUR CODE HERE
+  FILE *file =fopen(TODAYS_ANSWER_FILENAME, "r");
+  char word[WORD_SIZE+1];
+  int answer_found = fscanf(file, "%5s", word) ==1 && strlen(word) == WORD_SIZE;
+  fclose(file);
+
+  if(!answer_found){
+    return 0;
+  }
+
+  for(int i = 0; i<WORD_SIZE; i++){
+    answer[i]= (char)tolower((unsigned char)word[i]);
+  }
+  
+  answer[WORD_SIZE] = '\0';
+
+  return 1;
 
 }
 
